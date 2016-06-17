@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/Users/soriyanykeo/code_challenge_OD/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="3b822854684482644c2bddf061b525b2daaa84b3">
+        <dex dex="/Users/soriyanykeo/code_challenge_OD/app/build/intermediates/pre-dexed/debug/instant-run-bootstrap_eb82ae6d7668eaa0f0ee2b68bbfbbaa3da74d6a2.jar" />
+    </item>
+
+</items>

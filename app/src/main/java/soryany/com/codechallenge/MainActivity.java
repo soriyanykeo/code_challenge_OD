@@ -6,16 +6,31 @@ import android.os.Bundle;
 import java.util.ArrayList;
 import java.util.List;
 
+import soryany.com.codechallenge.DataStructures.ScheduleModel;
 import soryany.com.codechallenge.DataStructures.Employee;
 import soryany.com.codechallenge.DataStructures.SearchData;
 import soryany.com.codechallenge.DataStructures.SortData;
+import soryany.com.codechallenge.Services.EmailPostRequest;
+import soryany.com.codechallenge.Services.GetJsonRequest;
+import soryany.com.codechallenge.Services.PostJsonRequest;
 
+/**
+ * Created by soriyanykeo on 6/16/16.
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        new Thread(new Runnable() {
+            public void run() {
+                UserJSONRequest jsonRequest = new UserJSONRequest();
+                jsonRequest.getUserJSON();
+            }
+        }).start();
 
         //set up data
         Employee employee1 = new Employee();
@@ -81,5 +96,29 @@ public class MainActivity extends AppCompatActivity {
         searchData.searchDataByZipcode(employeeList,"78749");
         //Search employee by name
         searchData.searchDataBySSN(employeeList,"000SN4");
+
+
+        //JSONREQUEST
+        new Thread(new Runnable() {
+            public void run() {
+                //Email
+                EmailPostRequest emailPostRequest = new EmailPostRequest();
+                boolean isEmailSave= emailPostRequest.Post("1","skeo@gmail.com");
+                String msgStr = "There was an error during configuration and the email is not configured.";
+                if (isEmailSave){
+                    msgStr = "Your email's saved. Thank you!";
+                }
+                showAlertMSG(msgStr);
+                //GetJson
+                GetJsonRequest getJsonRequest = new GetJsonRequest();
+                final List<ScheduleModel> values = getJsonRequest.getJSON("12");
+                Log.i("com.sk.codechallenge", "getJsonRequest:"+values);
+                //PostJson
+                PostJsonRequest postJsonRequest = new PostJsonRequest();
+                postJsonRequest.Post("10");
+            }
+        }).start();
+
+
     }
 }
